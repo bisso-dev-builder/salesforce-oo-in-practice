@@ -2,16 +2,8 @@
 /**
  * @author eduardo.bisso - dev-builder
  */
-public class Advisor {
+public class Advisor extends Employee {
    
-    public String code;
-
-    public String name;
-
-    public String documentId;
-
-    public Decimal salary;
-
     public List<Account> accounts;
 
     public Advisor() {
