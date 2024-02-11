@@ -6,9 +6,20 @@ public class Advisor extends Employee {
    
     public List<Account> accounts;
 
-    public Advisor() {
-
+    public Advisor() {        
+        System.debug('Inicializei o Advisor com construtor padrão');
     }
+
+    public Advisor(String name) {        
+        super(name);
+    }
+
+    public Advisor (List<Account> accounts) {
+        this();
+        this.accounts = accounts;        
+        System.debug('Inicializei o Advisor com construtor com accounts');
+    }
+
 
 
 }

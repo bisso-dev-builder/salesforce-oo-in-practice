@@ -13,6 +13,13 @@ public virtual class Employee {
 
     public Employee() {
 
+        System.debug('Inicializei Employee');
+
     }
-    
+
+    public Employee(String name) {
+        this();
+        this.name = name;
+    }
+
 }
