@@ -37,20 +37,6 @@ public class EmployeeTest {
     }
 
     @isTest
-    public static void shouldApplyZeroBonusToEmployee () {   
-
-        Employee employee = new Employee ();
-        employee.code = '2321132';
-        employee.salary = 1000;
-        
-        Assert.areEqual ( 0 , employee.getBonus());
-
-    }
-        
-
-
-
-    @isTest
     public static void shouldApplyBonusToAnalyst () {             
     
         Analyst analyst = new Analyst ();
@@ -58,6 +44,17 @@ public class EmployeeTest {
         analyst.salary = 1000;
         
         Assert.areEqual ( 8750, analyst.getBonus());
+
+    }
+
+    @isTest
+    public static void shouldApplyBonusToVicePresidentLatam () {   
+
+        VicePresidentLatam vicePresident = new VicePresidentLatam();
+        vicePresident.code = '2321132';
+        vicePresident.salary = 1000;
+        
+        Assert.areEqual ( 15000 , vicePresident.getBonus());
 
     }
 
