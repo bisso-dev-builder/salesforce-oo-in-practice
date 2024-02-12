@@ -58,4 +58,30 @@ public class EmployeeTest {
 
     }
 
+
+    @isTest
+    public static void shouldApplyDowncastAndUpcast () {   
+
+        Analyst analyst = new Analyst ();
+        analyst.code = '2321132';
+        analyst.salary = 1000;
+
+        //Upcast - implícito
+        Employee employee = analyst;      
+
+        Assert.areEqual ( 8750, employee.getBonus());
+
+        //Downcast - sem explicitar vai gerar um erro de compilação
+        //Manager manager = employee;
+
+        //Cenário abaixo vai gerar um erro em tempo de execução
+
+        //Downcast - aplicando o operado de cast ()
+        //Manager manager = (Manager) employee;
+
+        //Para exercitar crie uma instancia de Manager e faça os mesmos passos
+
+    }
+
+
 }
