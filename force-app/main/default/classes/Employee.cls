@@ -22,4 +22,8 @@ public virtual class Employee {
         this.name = name;
     }
 
+    public Decimal getBonus () {
+        return this.salary * 1.75;
+    }
+
 }

@@ -18,6 +18,8 @@ public class EmployeeTest {
         Assert.areEqual ( DEFAULT_MANAGER_SALARY , manager.salary );
         Assert.isFalse ( manager.advisors.isEmpty() );
         
+        Assert.areEqual( 26250 , manager.getBonus());
+
         final Decimal DEFAULT_ADVISOR_SALARY = 7000;
 
         Advisor advisor = new Advisor ( new List<Account> () );
@@ -25,10 +27,12 @@ public class EmployeeTest {
         advisor.name = 'Bisso Manager';
         advisor.documentId = '34834873487';
         advisor.salary = DEFAULT_ADVISOR_SALARY;
-        
                 
         Assert.areEqual ( DEFAULT_ADVISOR_SALARY , advisor.salary );
         Assert.isTrue ( advisor.accounts.isEmpty() );
+
+        Assert.areEqual( 12250 , advisor.getBonus());
+
         
     }
 }
