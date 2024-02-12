@@ -1,7 +1,8 @@
 /**
  * @author eduardo.bisso - dev-builder
  */
-public abstract class Employee implements Comparable {
+public abstract class Employee implements Comparable
+                                            , Validable {
 
     public String code;
 
@@ -34,6 +35,11 @@ public abstract class Employee implements Comparable {
         if ( String.isEmpty (this.name) ) return -1;
 
         return this.name.compareTo(otherEmployee.name);
+    }
+
+    public Boolean isValid () {
+        return !String.isEmpty( this.code )
+                && ( this.salary != null && this.salary > 0 );
     }
 
 }
