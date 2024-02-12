@@ -20,5 +20,8 @@ public class Advisor extends Employee {
         System.debug('Inicializei o Advisor com construtor com accounts');
     }
 
-
+    override
+    public Decimal getBonus () {
+        return (this.salary * 2) + 5000;
+    }
 }

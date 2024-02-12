@@ -18,4 +18,11 @@ public class Manager extends Employee {
         this();
         this.advisors = advisors;
     }
+
+    override
+    public Decimal getBonus () {
+        return this.salary * 3;
+    }
+
+
 }

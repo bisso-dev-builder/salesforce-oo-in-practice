@@ -12,7 +12,7 @@ public class Analyst extends Employee {
     
     override
     public Decimal getBonus () {
-        return super.getBonus() + 7000;
+        return (this.salary * 1.75) + 7000;
     }
 
 }

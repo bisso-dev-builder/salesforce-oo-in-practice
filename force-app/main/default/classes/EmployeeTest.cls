@@ -18,7 +18,7 @@ public class EmployeeTest {
         Assert.areEqual ( DEFAULT_MANAGER_SALARY , manager.salary );
         Assert.isFalse ( manager.advisors.isEmpty() );
         
-        Assert.areEqual( 26250 , manager.getBonus());
+        Assert.areEqual( 45000 , manager.getBonus());
 
         final Decimal DEFAULT_ADVISOR_SALARY = 7000;
 
@@ -31,21 +31,27 @@ public class EmployeeTest {
         Assert.areEqual ( DEFAULT_ADVISOR_SALARY , advisor.salary );
         Assert.isTrue ( advisor.accounts.isEmpty() );
 
-        Assert.areEqual( 12250 , advisor.getBonus());
+        Assert.areEqual( 19000 , advisor.getBonus());
 
         
     }
 
-
     @isTest
-    public static void shouldApplyBonusToAnalyst () {   
-        
+    public static void shouldApplyZeroBonusToEmployee () {   
+
         Employee employee = new Employee ();
         employee.code = '2321132';
         employee.salary = 1000;
         
-        Assert.areEqual ( 1750, employee.getBonus());
-    
+        Assert.areEqual ( 0 , employee.getBonus());
+
+    }
+        
+
+
+
+    @isTest
+    public static void shouldApplyBonusToAnalyst () {             
     
         Analyst analyst = new Analyst ();
         analyst.code = '2321132';

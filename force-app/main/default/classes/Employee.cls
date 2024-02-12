@@ -24,7 +24,7 @@ public virtual class Employee {
 
     virtual
     public Decimal getBonus () {
-        return this.salary * 1.75;
+        return 0;
     }
 
 }
