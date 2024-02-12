@@ -1,7 +1,7 @@
 /**
  * @author eduardo.bisso - dev-builder
  */
-public abstract class Employee {
+public abstract class Employee implements Comparable {
 
     public String code;
 
@@ -24,5 +24,16 @@ public abstract class Employee {
 
     abstract
     public Decimal getBonus ();
+
+    public Integer compareTo(Object other) {
+
+        Employee otherEmployee = (Employee) other;
+
+        if ( otherEmployee == null ) return 1;
+
+        if ( String.isEmpty (this.name) ) return -1;
+
+        return this.name.compareTo(otherEmployee.name);
+    }
 
 }
