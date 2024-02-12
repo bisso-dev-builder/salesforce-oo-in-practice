@@ -35,4 +35,24 @@ public class EmployeeTest {
 
         
     }
+
+
+    @isTest
+    public static void shouldApplyBonusToAnalyst () {   
+        
+        Employee employee = new Employee ();
+        employee.code = '2321132';
+        employee.salary = 1000;
+        
+        Assert.areEqual ( 1750, employee.getBonus());
+    
+    
+        Analyst analyst = new Analyst ();
+        analyst.code = '2321132';
+        analyst.salary = 1000;
+        
+        Assert.areEqual ( 8750, analyst.getBonus());
+
+    }
+
 }
