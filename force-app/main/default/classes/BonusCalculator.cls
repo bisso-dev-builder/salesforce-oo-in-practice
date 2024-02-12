@@ -5,24 +5,12 @@ public class BonusCalculator {
 
     Decimal totalBonus;
 
-    public Decimal calculateBonus ( Advisor advisor ) {
-        return this.totalBonus += advisor.getBonus();
+    public BonusCalculator() {
+        this.totalBonus = 0;
     }
 
-    public Decimal calculateBonus ( Manager manager ) {
-        return this.totalBonus += manager.getBonus();
-    }
-
-    public Decimal calculateBonus ( Analyst analyst ) {
-        return this.totalBonus += analyst.getBonus();
-    }
-
-    public Decimal calculateBonus ( Director director ) {
-        return this.totalBonus += director.getBonus();
-    }
-
-    public Decimal calculateBonus ( VicePresidentLatam vicePresident ) {
-        return this.totalBonus += vicePresident.getBonus();
+    public Decimal calculateBonus ( Employee employee ) {
+        return this.totalBonus += employee.getBonus();
     }
 
     public Decimal getTotal() {
