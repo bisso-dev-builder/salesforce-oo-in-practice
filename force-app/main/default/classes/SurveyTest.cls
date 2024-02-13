@@ -7,34 +7,39 @@ public class SurveyTest {
     @isTest
     public static void shouldCreateSurveys () {
         
-        Survey survey = new Survey ();
-        survey.title = 'Curso de OO do Bisso';
-        survey.description = 'Avalie seus conhecimentos em OO aplicado à plataforma Salesforce';
-        survey.startDate = Date.today().addDays(5);
-        survey.dueDate =  Date.today().addDays(30);
+        Survey survey = new Survey ()
+                                .withTitle('Curso de OO do Bisso')
+                                .withDescription('Avalie seus conhecimentos em OO aplicado à plataforma Salesforce')
+                                .withStartDate( Date.today().addDays(5) )
+                                .withDueDate ( Date.today().addDays(30) );
 
-        SurveyQuestion shortText = new SurveyQuestionShortText();
-        shortText.title = 'Comente sobre sobrecarga';
+        SurveyQuestion shortText = new SurveyQuestionShortText()
+                                        .withTitle('Comente sobre sobrecarga')
+                                        .withDescription('Com um twit');
         
-        survey.questions.add ( shortText );
+        survey.addQuestion(  shortText );
 
         Assert.areEqual( SurveyQuestionType.SHORT_TEXT , shortText.type);
 
-        SurveyQuestion paragraph = new SurveyQuestionParagraph();
-        paragraph.title = 'Descreva a aplicabilidade do polimorfismo';
-
-        survey.questions.add ( paragraph );
+        SurveyQuestion paragraph = new SurveyQuestionParagraph()
+                                        .withTitle('Descreva a aplicabilidade do polimorfismo');
+        survey.addQuestion( paragraph );
 
         Assert.areEqual( SurveyQuestionType.PARAGRAPH , paragraph.type);
 
-        SurveyQuestionCode codeQuestion = new SurveyQuestionCode();
-        codeQuestion.title = 'Analise o código a seguir e comente os problemas encontrados';
-        codeQuestion.code = 'public class HelloBisso {\n \t default String message \n}';
-        
+        SurveyQuestionCode codeQuestion = (SurveyQuestionCode)
+                                                new SurveyQuestionCode()
+                                                    .withCode ('public class HelloBisso {\n \t default String message \n}')
+                                                    .withTitle('Descreva a aplicabilidade do polimorfismo');
+
         Assert.areEqual( SurveyQuestionType.CODE_TEXT , codeQuestion.type);
         Assert.isNotNull( codeQuestion.code );
 
-        survey.questions.add ( codeQuestion );
+        survey.addQuestion( new SurveyQuestionCode()
+                    .withCode ('public class HelloBisso {\n \t default String message \n}')
+                    .withTitle('Descreva a aplicabilidade do polimorfismo') 
+        );
+
 
         Assert.areEqual(3, survey.questions.size());
 
@@ -62,6 +67,7 @@ public class SurveyTest {
 
         Assert.areEqual( SurveyQuestionType.MULTIPLE_CHOICE , multipleChoice.type);
         Assert.areEqual( 4 , multipleChoice.options.size());
+
 
 
         SurveyQuestionMultipleChoiceGrid multipleChoiceGrid = new SurveyQuestionMultipleChoiceGrid();

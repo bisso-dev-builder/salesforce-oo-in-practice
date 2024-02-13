@@ -8,4 +8,9 @@ public class SurveyQuestionCode extends SurveyQuestion {
     public SurveyQuestionCode() {
         super(SurveyQuestionType.CODE_TEXT);
     }
+
+    public SurveyQuestionCode withCode (String code) {
+        this.code = code;
+        return this;
+    }
 }

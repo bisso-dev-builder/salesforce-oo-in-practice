@@ -19,4 +19,34 @@ public class Survey {
 
     }
 
+    public Survey withTitle (String title) {
+
+        this.title = title;
+        return this;
+    }
+
+    public Survey withDescription (String description) {
+
+        this.description = description;
+        return this;
+    }
+
+    public Survey withStartDate (Date startDate) {
+
+        this.startDate = startDate;
+        return this;
+    }
+
+    public Survey withDueDate (Date dueDate) {
+
+        this.dueDate = dueDate;
+        return this;
+    }
+
+    public Survey addQuestion (SurveyQuestion question) {
+
+        questions.add( question );
+        return this;
+    }
+
 }
