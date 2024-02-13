@@ -13,21 +13,21 @@ public class SurveyTest {
         survey.startDate = Date.today().addDays(5);
         survey.dueDate =  Date.today().addDays(30);
 
-        SurveyQuestion shortText = new SurveyQuestion( SurveyQuestionType.SHORT_TEXT );
+        SurveyQuestion shortText = new SurveyQuestionShortText();
         shortText.title = 'Comente sobre sobrecarga';
         
         survey.questions.add ( shortText );
 
         Assert.areEqual( SurveyQuestionType.SHORT_TEXT , shortText.type);
 
-        SurveyQuestion paragraph = new SurveyQuestion(SurveyQuestionType.PARAGRAPH);
+        SurveyQuestion paragraph = new SurveyQuestionParagraph();
         paragraph.title = 'Descreva a aplicabilidade do polimorfismo';
 
         survey.questions.add ( paragraph );
 
         Assert.areEqual( SurveyQuestionType.PARAGRAPH , paragraph.type);
 
-        SurveyQuestion codeQuestion = new SurveyQuestion(SurveyQuestionType.CODE_TEXT);
+        SurveyQuestionCode codeQuestion = new SurveyQuestionCode();
         codeQuestion.title = 'Analise o código a seguir e comente os problemas encontrados';
         codeQuestion.code = 'public class HelloBisso {\n \t default String message \n}';
         
@@ -38,8 +38,7 @@ public class SurveyTest {
 
         Assert.areEqual(3, survey.questions.size());
 
-
-        SurveyQuestion linearScale = new SurveyQuestion(SurveyQuestionType.LINEAR_SCALE);
+        SurveyQuestionLinearScale linearScale = new SurveyQuestionLinearScale();
         linearScale.title = 'Avalie seu grau de satisfação com o curso do bisso';
         linearScale.scales.add ( new SurveyLinearScale (0, 'Insatisfeito'));
         linearScale.scales.add ( new SurveyLinearScale (1, 'Um cadin insatisfeito'));
@@ -52,7 +51,7 @@ public class SurveyTest {
         Assert.areEqual( SurveyQuestionType.LINEAR_SCALE , linearScale.type);
         Assert.areEqual( 5 , linearScale.scales.size());
 
-        SurveyQuestion multipleChoice = new SurveyQuestion(SurveyQuestionType.MULTIPLE_CHOICE);
+        SurveyQuestionMultipleChoice multipleChoice = new SurveyQuestionMultipleChoice();
         multipleChoice.title = 'Identifique o grau de conhecimento em Polimorfismo';
         multipleChoice.options.add ( new SurveyQuestionOption ('Desconheço'));
         multipleChoice.options.add ( new SurveyQuestionOption ('Conheço'));
