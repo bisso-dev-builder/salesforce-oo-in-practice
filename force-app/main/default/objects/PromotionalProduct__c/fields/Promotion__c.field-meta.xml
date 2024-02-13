@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Promotion__c</fullName>
+    <externalId>false</externalId>
+    <label>Promotion</label>
+    <referenceTo>Promotion__c</referenceTo>
+    <relationshipLabel>Promotional Products</relationshipLabel>
+    <relationshipName>PromotionalProducts</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>
