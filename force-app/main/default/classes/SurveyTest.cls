@@ -64,7 +64,29 @@ public class SurveyTest {
         Assert.areEqual( 4 , multipleChoice.options.size());
 
 
-        Assert.areEqual(5, survey.questions.size());
+        SurveyQuestionMultipleChoiceGrid multipleChoiceGrid = new SurveyQuestionMultipleChoiceGrid();
+        multipleChoice.title = 'Identifique o grau de conhecimento sobre os temas abaixo';
+
+        multipleChoiceGrid.rows.add ( new SurveyQuestionOption ('Classe abstrata'));
+        multipleChoiceGrid.rows.add ( new SurveyQuestionOption ('Sobrecarga'));
+        multipleChoiceGrid.rows.add ( new SurveyQuestionOption ('Sobrescrita'));
+        multipleChoiceGrid.rows.add ( new SurveyQuestionOption ('Polimorfismo'));
+        multipleChoiceGrid.rows.add ( new SurveyQuestionOption ('Herança'));
+
+        multipleChoiceGrid.options.add ( new SurveyQuestionOption ('Desconheço'));
+        multipleChoiceGrid.options.add ( new SurveyQuestionOption ('Conheço'));
+        multipleChoiceGrid.options.add ( new SurveyQuestionOption ('Pratico'));
+        multipleChoiceGrid.options.add ( new SurveyQuestionOption ('Domino'));
+
+        survey.questions.add ( multipleChoiceGrid );
+
+        Assert.areEqual( SurveyQuestionType.MULTIPLE_CHOICE_GRID , multipleChoiceGrid.type);
+        Assert.areEqual( 4 , multipleChoiceGrid.options.size());
+        Assert.areEqual( 5 , multipleChoiceGrid.rows.size());
+
+
+
+        Assert.areEqual(6, survey.questions.size());
 
         System.debug(survey);
 

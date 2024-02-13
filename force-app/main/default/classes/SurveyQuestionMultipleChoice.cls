@@ -1,13 +1,17 @@
 /**
  * @author eduardo.bisso - dev-builder
  */
-public class SurveyQuestionMultipleChoice extends SurveyQuestion {
+public virtual class SurveyQuestionMultipleChoice extends SurveyQuestion {
 
     public List<SurveyQuestionOption> options;
 
     public SurveyQuestionMultipleChoice() {
-        super(SurveyQuestionType.MULTIPLE_CHOICE);
+        this(SurveyQuestionType.MULTIPLE_CHOICE);
     }
-   
+    
+    public SurveyQuestionMultipleChoice (SurveyQuestionType type) {
+        super(type);
+        this.options = new List<SurveyQuestionOption>();
+    }
 
 }

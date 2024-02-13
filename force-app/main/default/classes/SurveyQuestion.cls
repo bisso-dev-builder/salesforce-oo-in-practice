@@ -1,7 +1,7 @@
 /**
  * @author eduardo.bisso - dev-builder
  */
-public virtual class SurveyQuestion {
+public abstract class SurveyQuestion {
     
     public String title;
 
