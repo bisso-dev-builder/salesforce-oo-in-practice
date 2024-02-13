@@ -5,8 +5,11 @@ public virtual class PromotionService {
 
     PromotionalProductRepository repository;
 
+    PromotionalProductFilter filter;
+
     public PromotionService() {
         this.repository = new PromotionalProductRepository();
+        this.filter = new PromotionalProductFilter();
     }
 
     virtual
@@ -15,7 +18,13 @@ public virtual class PromotionService {
         List<PromotionalProduct__c> promotionalProducts = 
                                         this.repository.findAvailablePromotionsForProducts(productIds);
         
-        return null;
+        List<PromotionalProduct__c> filteredPromotionalProducts = 
+                                        filter.indexPromotionalProducts (promotionalProducts).values();
+
+        return new PromotionalProductBuilder()
+                            .withPromotionalProducts (filteredPromotionalProducts)
+                            .build();
+
     }
 
 }
