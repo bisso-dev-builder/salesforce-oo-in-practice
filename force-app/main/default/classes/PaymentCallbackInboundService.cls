@@ -4,28 +4,9 @@
 public class PaymentCallbackInboundService {
 
     PayerSearcher searcher;
-
-    AccountRepository accountRepository;
-
-    PricebookRepository priceBookRepository;
-
-    OpportunityRepository opportunityRepository;
-
-    AccountPaymentCallbackBuilder accountBuilder;
-
-    LeadConverterService leadConverterService;
-
-    OpportunityPaymentCallbackBuilder opportunityBuilder;
-
-  
+   
     public PaymentCallbackInboundService() {
         this.searcher = new PayerSearcher();
-        this.accountRepository = new AccountRepository();
-        this.priceBookRepository = new PricebookRepository();
-        this.opportunityRepository = new OpportunityRepository();
-        this.leadConverterService = new LeadConverterService();
-        this.accountBuilder = new AccountPaymentCallbackBuilder();
-        this.opportunityBuilder = new OpportunityPaymentCallbackBuilder();
     }
 
     public PaymentCallbackResponse processPayment ( PaymentCallbackInbound payment ) {
@@ -36,39 +17,32 @@ public class PaymentCallbackInboundService {
 
         List<Lead> leads = payers.get(1);
 
-        Account account;
-
         PaymentCallbackInbound.Payer payer = payment?.payer;
+
+        BaseCreateOpportunityCallback callbackService;
 
         if (accounts.isEmpty() && leads.isEmpty()) {
 
-            account = accountBuilder.toAccount(payment);
-
-            accountRepository.save(account);
+           callbackService = new CreateAccountOpportunityCallback();
 
         }
         
         if (accounts.isEmpty() && !leads.isEmpty()) {
 
-            Database.LeadConvertResult convertResult 
-                                = this.leadConverterService.convertWithoutOpportunity( leads.get(0) );
-
-            account = new Account( Id = convertResult.getAccountId());
+            callbackService = new ConvertLeadOpportunityCallback();
+            callbackService.setPayer( leads.get(0) );
 
         }
 
         if (!accounts.isEmpty()) {
 
-            account =  accounts.get(0);
+            callbackService = new HasAccountOpportunityCallback();
+            callbackService.setPayer( accounts.get(0) );
 
         }
 
-        Pricebook2 pricebook = this.priceBookRepository.findByName('Campanha DevBuilder');
-
-        Opportunity opportunity = opportunityBuilder.toOpportunity(payment, pricebook, account);
-
-        opportunityRepository.save(opportunity);
-
+        Opportunity opportunity = callbackService.createOpportunity(payment);
+        
         return new PaymentCallbackResponse(opportunity.Id);
     }
     
