@@ -4,9 +4,18 @@
 public class PaymentCallbackInboundService {
 
     PayerSearcher searcher;
+
+    AccountRepository accountRepository;
+
+    PricebookRepository priceBookRepository;
+
+    OpportunityRepository opportunityRepository;
   
     public PaymentCallbackInboundService() {
         this.searcher = new PayerSearcher();
+        this.accountRepository = new AccountRepository();
+        this.priceBookRepository = new PricebookRepository();
+        this.opportunityRepository = new OpportunityRepository();
     }
 
     public PaymentCallbackResponse processPayment ( PaymentCallbackInbound payment ) {
@@ -17,9 +26,24 @@ public class PaymentCallbackInboundService {
 
         List<Lead> leads = payers.get(1);
 
+        Account account;
+
+        PaymentCallbackInbound.Payer payer = payment?.payer;
+
         if (accounts.isEmpty() && leads.isEmpty()) {
 
-            // criar a conta
+            account = new Account (
+                Name = payer.name,
+                DocumentNumber__c = payer.document,
+                AccountSource = 'Campanha DevBuilder',
+                BillingStreet = payer?.billing?.street,
+                BillingCity = payer?.billing?.city,
+                BillingState = payer?.billing?.state,
+                BillingPostalCode = payer?.billing?.zipCode,
+                BillingCountry = payer?.billing?.country
+            );
+
+            accountRepository.save(account);
 
         }
         
@@ -35,8 +59,20 @@ public class PaymentCallbackInboundService {
 
         }
 
+        Pricebook2 pricebook = this.priceBookRepository.findByName('Campanha DevBuilder');
 
-        return new PaymentCallbackResponse(); //new PaymentCallbackResponse(opportunity.Id)
+        Opportunity opportunity = new Opportunity (
+            Name = payment?.payer.name,
+            AccountId = account.Id,
+            Pricebook2Id = priceBook.Id,
+            CloseDate = Date.today(),
+            StageName = 'Closed Won',
+            LeadSource = 'Campanha DevBuilder'
+        );
+
+        opportunityRepository.save(opportunity);
+
+        return new PaymentCallbackResponse(opportunity.Id);
     }
     
 }
