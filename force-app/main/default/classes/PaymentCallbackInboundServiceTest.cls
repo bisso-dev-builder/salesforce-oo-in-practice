@@ -49,31 +49,31 @@ public class PaymentCallbackInboundServiceTest {
     }
 
     public static List<Lead> findAvailableLeads () {
-        return [SELECT Id, Status FROM Lead];
+        return [SELECT Id, Status FROM Lead]; 
     }
 
     @isTest
     public static void shouldCreateOpportunityWithExistingAccount () {
         
-        PaymentCallbackInbound callbackInbound = PaymentCallbackInboundFixtureFactory.newPaymentCallbackInbound();
+        PaymentCallbackInbound callbackInbound = PaymentCallbackInboundFixtureFactory.newPaymentCallbackInbound(); 
 
-        Account account = AccountFixtureFactory.createAccount('Bisso', callbackInbound.payer.document );
+        Account account = AccountFixtureFactory.createAccount('Bisso', callbackInbound.payer.document ); 
 
-        Test.setFixedSearchResults( new List<String> {account.id} );
+        Test.setFixedSearchResults( new List<String> {account.id} ); 
         
-        Test.startTest();
+        Test.startTest(); 
         
-        PaymentCallbackInboundService service = new PaymentCallbackInboundService();
+        PaymentCallbackInboundService service = new PaymentCallbackInboundService(); 
         
-        PaymentCallbackResponse response = service.processPayment(callbackInbound);
+        PaymentCallbackResponse response = service.processPayment(callbackInbound); 
         
-        Test.stopTest();
+        Test.stopTest(); 
 
-        Assert.isNotNull( response.operationId );
+        Assert.isNotNull( response.operationId ); 
 
-        List<Opportunity> storedOpportunities = findAvailableOpportunities();
+        List<Opportunity> storedOpportunities = findAvailableOpportunities(); 
 
-        Assert.areEqual( 1 , storedOpportunities.size() );
+        Assert.areEqual( 1 , storedOpportunities.size() ); 
 
     }
 
@@ -81,35 +81,35 @@ public class PaymentCallbackInboundServiceTest {
     @isTest
     public static void shouldCreateOpportunityAndConvertLeadToAccount () {
         
-        PaymentCallbackInbound callbackInbound = PaymentCallbackInboundFixtureFactory.newPaymentCallbackInbound();
+        PaymentCallbackInbound callbackInbound = PaymentCallbackInboundFixtureFactory.newPaymentCallbackInbound(); 
 
-        Lead lead = LeadFixtureFactory.createLead('Bisso', callbackInbound.payer.document );
+        Lead lead = LeadFixtureFactory.createLead('Bisso', callbackInbound.payer.document ); 
 
-        Test.setFixedSearchResults( new List<String> {lead.id} );
+        Test.setFixedSearchResults( new List<String> {lead.id} ); 
 
-        Assert.areEqual( 0 , findAvailableAccounts ().size() );
+        Assert.areEqual( 0 , findAvailableAccounts ().size() ); 
         
-        Test.startTest();
+        Test.startTest(); 
         
-        PaymentCallbackInboundService service = new PaymentCallbackInboundService();
+        PaymentCallbackInboundService service = new PaymentCallbackInboundService(); 
         
-        PaymentCallbackResponse response = service.processPayment(callbackInbound);
+        PaymentCallbackResponse response = service.processPayment(callbackInbound); 
         
-        Test.stopTest();
+        Test.stopTest(); 
 
-        Assert.isNotNull( response.operationId );
+        Assert.isNotNull( response.operationId ); 
 
-        List<Account> storedAccounts = findAvailableAccounts();
+        List<Account> storedAccounts = findAvailableAccounts(); 
 
-        Assert.areEqual( 1 ,  storedAccounts.size() );
+        Assert.areEqual( 1 ,  storedAccounts.size() ); 
 
-        List<Lead> storedLeads = findAvailableLeads();
+        List<Lead> storedLeads = findAvailableLeads(); 
 
-        Assert.areEqual( 'Closed - Converted' ,  storedLeads.get(0).Status );
+        Assert.areEqual( 'Closed - Converted' ,  storedLeads.get(0).Status ); 
 
-        List<Opportunity> storedOpportunities = findAvailableOpportunities();
+        List<Opportunity> storedOpportunities = findAvailableOpportunities(); 
 
-        Assert.areEqual( 1 , storedOpportunities.size() );
+        Assert.areEqual( 1 , storedOpportunities.size() ); 
 
     }
 
