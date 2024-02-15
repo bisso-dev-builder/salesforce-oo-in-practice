@@ -43,6 +43,8 @@ public abstract class BaseCreateOpportunityCallback {
         return this.callbackInbound;
     }
 
-    public abstract Account buildAccount ();   
+    public abstract Account buildAccount ();
+    
+    public abstract Boolean accept (List<List<SObject>> payers);
 
 }

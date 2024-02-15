@@ -3,34 +3,23 @@
  */
 public class CreateOpportutityCallbackFactory {
 
+    List<BaseCreateOpportunityCallback> strategies;
     
-    public BaseCreateOpportunityCallback getStrategy ( List<List<SObject>> payers ) {        
+    public CreateOpportutityCallbackFactory() {
+        this.strategies = new List<BaseCreateOpportunityCallback> {
+            new CreateAccountOpportunityCallback()
+            , new ConvertLeadOpportunityCallback()
+            , new HasAccountOpportunityCallback()
+        };
+    }
 
-        List<Account> accounts = payers.get(0);
+    public BaseCreateOpportunityCallback getStrategy ( List<List<SObject>> payers ) {
 
-        List<Lead> leads = payers.get(1);
+        for ( BaseCreateOpportunityCallback strategy : strategies ) {
 
-        BaseCreateOpportunityCallback callbackService;
-
-        if (accounts.isEmpty() && leads.isEmpty()) {
-
-           return new CreateAccountOpportunityCallback();
-
-        }
-        
-        if (accounts.isEmpty() && !leads.isEmpty()) {
-
-            callbackService = new ConvertLeadOpportunityCallback();
-            callbackService.setPayer( leads.get(0) );
-            return callbackService;
-
-        }
-
-        if (!accounts.isEmpty()) {
-
-            callbackService = new HasAccountOpportunityCallback();
-            callbackService.setPayer( accounts.get(0) );
-            return callbackService;
+            if (strategy.accept(payers)) {
+                return strategy;
+            }
 
         }
 

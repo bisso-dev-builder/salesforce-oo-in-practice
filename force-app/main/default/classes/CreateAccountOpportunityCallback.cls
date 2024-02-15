@@ -19,4 +19,15 @@ public class CreateAccountOpportunityCallback extends BaseCreateOpportunityCallb
 
     }
 
+    override
+    public Boolean accept (List<List<SObject>> payers) {
+
+        List<Account> accounts = (List<Account>) payers.get(0);
+
+        List<Lead> leads = (List<Lead>) payers.get(1);
+
+        return accounts.isEmpty() && leads.isEmpty();
+
+    }
+
 }
